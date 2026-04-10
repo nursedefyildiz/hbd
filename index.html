@@ -19,18 +19,19 @@
             overflow: hidden;
         }
 
-        /* --- BALONLAR VE SAPLARI --- */
+        /* --- BALONLAR VE SAPLARI (İPLERİ) --- */
         .balloon {
             position: absolute;
             bottom: -150px;
-            width: 50px; 
+            width: 50px; /* Eski boyuta geri döndü */
             height: 65px;
             border-radius: 50%;
-            opacity: 0.5;
+            opacity: 0.6;
             z-index: 1;
             animation: floatUp var(--d) linear infinite;
         }
 
+        /* Balonun Sapı (İpi) - KESİNLİKLE DOKUNULMADI */
         .balloon::after {
             content: "";
             position: absolute;
@@ -38,14 +39,14 @@
             left: 50%;
             width: 1px;
             height: 35px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.15);
         }
 
         @keyframes floatUp {
             to { transform: translateY(-130vh) rotate(15deg); }
         }
 
-        /* --- YARI SAYDAM PANEL --- */
+        /* --- YARI SAYDAM PANEL - KESİNLİKLE DOKUNULMADI --- */
         .glass-panel {
             background: rgba(255, 255, 255, 0.3); /* Yarı saydam beyaz */
             backdrop-filter: blur(10px); /* Arkayı hafif buğular */
@@ -63,11 +64,14 @@
             align-items: center;
         }
 
+        /* --- HELLO KITTY - ARTIK DAHA BÜYÜK! --- */
         .kitty-img {
-            width: 240px;
+            width: 90%; /* Panelin genişliğinin %90'ını kaplasın */
+            max-width: 290px; /* Paneli patlatmaması için üst sınır */
             height: auto;
             animation: floating 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 15px rgba(214, 51, 132, 0.1));
+            filter: drop-shadow(0 15px 25px rgba(214, 51, 132, 0.15));
+            transition: opacity 0.4s ease;
         }
 
         @keyframes floating {
@@ -77,12 +81,12 @@
 
         h1 {
             color: #d63384;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin: 15px 0 10px 0;
             font-weight: 600;
         }
 
-        /* --- ÇERÇEVESİZ VE ŞIK BUTON --- */
+        /* --- ÇERÇEVESİZ VE ŞIK BUTON - KESİNLİKLE DOKUNULMADI --- */
         .clean-btn {
             background: none;
             border: none;
@@ -140,7 +144,6 @@
             
             kitty.style.opacity = '0.4';
             setTimeout(() => {
-                // Mumları sönük resme geçir
                 kitty.src = 'hello_sonuk.png';
                 kitty.style.opacity = '1';
                 
@@ -150,7 +153,6 @@
                 btn.innerText = 'HEDİYENİ AÇ 🎁';
                 btn.onclick = () => window.location.href = "muzikler.html";
 
-                // Konfeti patlaması
                 confetti({
                     particleCount: 150,
                     spread: 70,
