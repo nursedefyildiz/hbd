@@ -2,70 +2,163 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Bir Mesajım Var! 🎀</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sana Özel ✨</title>
     <style>
-        body {
-            background-color: #ffeaf2; /* Hello Kitty pembesi */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background: #ffeaf2;
+            font-family: -apple-system, "Segoe UI", sans-serif;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- BALONLAR VE SAPLARI --- */
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 50px; 
+            height: 65px;
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 1;
+            animation: floatUp var(--d) linear infinite;
+        }
+
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            width: 1px;
+            height: 35px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes floatUp {
+            to { transform: translateY(-130vh) rotate(15deg); }
+        }
+
+        /* --- YARI SAYDAM PANEL --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.3); /* Yarı saydam beyaz */
+            backdrop-filter: blur(10px); /* Arkayı hafif buğular */
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 40px;
+            padding: 30px 20px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            color: #d63384;
-            text-align: center;
         }
 
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 5px solid #ffb6c1;
-            max-width: 80%;
+        .kitty-img {
+            width: 240px;
+            height: auto;
+            animation: floating 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 15px rgba(214, 51, 132, 0.1));
         }
 
-        img {
-            width: 150px;
-            margin-bottom: 20px;
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            color: #d63384;
+            font-size: 1.3rem;
+            margin: 15px 0 10px 0;
+            font-weight: 600;
         }
 
-        p {
-            font-size: 18px;
-            line-height: 1.6;
+        /* --- ÇERÇEVESİZ VE ŞIK BUTON --- */
+        .clean-btn {
+            background: none;
+            border: none;
+            color: #d63384;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+            margin-top: 5px;
         }
 
-        .heart {
-            color: #ff0000;
-            font-size: 30px;
-            animation: pulse 1s infinite;
+        .clean-btn:active {
+            opacity: 0.6;
+            transform: scale(0.95);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/en/0/05/Hello_kitty_character_portrait.png" alt="Hello Kitty">
+    <div id="balloon-container"></div>
+
+    <div class="glass-panel">
+        <img src="hello_yanan.png" id="kitty" class="kitty-img" alt="Hello Kitty">
         
-        <h1>Selam! ✨</h1>
-        <p>Bu anahtarlığı okuttuysan, benim için çok değerlisin demektir.</p>
-        <p>Senin için hazırladığım bu minik sürprizi umarım beğenirsin!</p>
+        <h1 id="status-text">Üfle ve Dilek Tut...</h1>
         
-        <div class="heart">❤</div>
+        <button class="clean-btn" id="action-btn" onclick="ufle()">
+            ÜFLE! 🌬️
+        </button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Balonları ipleriyle üret
+        const container = document.getElementById('balloon-container');
+        const colors = ['#FFB6C1', '#FF69B4', '#FFFFFF', '#FFD700', '#ADD8E6'];
+        
+        for (let i = 0; i < 15; i++) {
+            const b = document.createElement('div');
+            b.className = 'balloon';
+            b.style.left = Math.random() * 92 + 'vw';
+            b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            b.style.setProperty('--d', (Math.random() * 5 + 8) + 's');
+            b.style.animationDelay = Math.random() * 6 + 's';
+            container.appendChild(b);
+        }
+
+        function ufle() {
+            const kitty = document.getElementById('kitty');
+            
+            kitty.style.opacity = '0.4';
+            setTimeout(() => {
+                // Mumları sönük resme geçir
+                kitty.src = 'hello_sonuk.png';
+                kitty.style.opacity = '1';
+                
+                document.getElementById('status-text').innerText = 'İYİ Kİ DOĞDUN! 🎉';
+                
+                const btn = document.getElementById('action-btn');
+                btn.innerText = 'HEDİYENİ AÇ 🎁';
+                btn.onclick = () => window.location.href = "muzikler.html";
+
+                // Konfeti patlaması
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#FF69B4', '#FFFFFF', '#FFD700']
+                });
+            }, 300);
+        }
+    </script>
 </body>
 </html>
