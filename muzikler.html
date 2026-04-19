@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OUR PL 💖</title>
+    <link rel="icon" type="image/png" href="hello_yanan.png">
+    <style>
+        :root {
+            --p-pink: #FFB6C1;
+            --p-yellow: #FEF65B;
+            --p-lila: #E6E6FA;
+            --deep-pink: #d63384;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            background: #ffeaf2; 
+            margin: 0; 
+            font-family: -apple-system, sans-serif; 
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- ARKA PLANDA UÇAN BALONLAR --- */
+        #balloon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .bg-balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 45px;
+            height: 60px;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: floatUp var(--d) linear infinite;
+        }
+        .bg-balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            width: 1px;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        @keyframes floatUp { to { transform: translateY(-130vh) rotate(15deg); } }
+
+        /* --- FULL EKRAN PARTİ BAYRAKLARI --- */
+        .banner-container {
+            position: fixed; top: -5px; width: 100%; height: 60px;
+            display: flex; justify-content: space-around; gap: 2px; z-index: 100;
+            pointer-events: none;
+        }
+        .flag {
+            width: 22px; height: 38px;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            animation: swing var(--speed) infinite ease-in-out alternate;
+            transform-origin: top;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .flag:nth-child(4n+1) { background: var(--p-pink); --speed: 2.1s; }
+        .flag:nth-child(4n+2) { background: var(--p-yellow); --speed: 1.8s; }
+        .flag:nth-child(4n+3) { background: var(--p-lila); --speed: 2.4s; }
+        .flag:nth-child(4n+4) { background: #ffffff; --speed: 2s; opacity: 0.8; }
+
+        @keyframes swing { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+
+        /* --- İÇERİK ALANI --- */
+        .scroll-area {
+            width: 100%; max-width: 450px; padding: 100px 15px 50px 15px;
+            display: flex; flex-direction: column; gap: 50px; z-index: 10;
+        }
+
+        h2 { text-align: center; color: var(--deep-pink); font-size: 1.3rem; letter-spacing: 4px; margin-bottom: 10px; text-transform: uppercase; z-index: 10; position: relative;}
+
+        /* --- KASETLER --- */
+        .cassette-box {
+            width: 55%; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center;
+            text-decoration: none; animation: tilt 4s infinite ease-in-out;
+        }
+        .cassette-img { width: 100%; border-radius: 12px; filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08)); }
+        @keyframes tilt { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+
+        /* --- FOTO + CD SATIRI --- */
+        .pair-row { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .f-side { width: 65%; transform: rotate(var(--r)); }
+        .f-side img { width: 100%; height: auto; display: block; }
+
+        .cd-side { width: 35%; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
+        .cd-img { width: 100%; animation: spin 8s linear infinite; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1)); }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .label { margin-top: 8px; color: #d63384; font-size: 0.65rem; font-weight: bold; letter-spacing: 1px; text-align: center;}
+
+        .back { margin: 40px auto; color: #d63384; text-decoration: none; opacity: 0.6; font-size: 0.8rem; font-weight: bold; z-index: 10; position: relative;}
+    </style>
+</head>
+<body>
+
+    <div id="balloon-bg"></div>
+
+    <div class="banner-container">
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+    </div>
+
+    <div class="scroll-area">
+        <h2>💖 Our Playlist 🎶</h2>
+        
+        <a href="https://open.spotify.com/intl-tr/track/36BAyRljdSQJfYrbC3pDHP?si=1f7f897188f64ba3" class="cassette-box">
+            <img src="m1.png" class="cassette-img">
+            <span class="label">FAV TRACK 01</span>
+        </a>
+
+        <div class="pair-row">
+            <div class="f-side" style="--r: -3deg;"><img src="f1.png"></div>
+            <a href="https://open.spotify.com/intl-tr/track/2bKPcb210p1TKBRmxYfmot?si=79bca22d65844999" class="cd-side">
+                <img src="m4.png" class="cd-img">
+                <span class="label">PLAY 💿</span>
+            </a>
+        </div>
+
+        <a href="https://open.spotify.com/intl-tr/track/3srY5SiqYGZiXk6xeDy1sd?si=dac578827fcd4cb8" class="cassette-box">
+            <img src="m2.png" class="cassette-img">
+            <span class="label">FAV TRACK 02</span>
+        </a>
+
+        <div class="pair-row">
+            <a href="https://open.spotify.com/intl-tr/track/15mqx1Nh22AgXhtow1icPj?si=1b478a767b1e4204" class="cd-side">
+                <img src="m5.png" class="cd-img">
+                <span class="label">PLAY 💿</span>
+            </a>
+            <div class="f-side" style="--r: 2deg;"><img src="f2.png"></div>
+        </div>
+
+        <a href="https://open.spotify.com/intl-tr/track/304T9JCR0DQXor0lLKIyfT?si=93054e9a8e5f4efd" class="cassette-box">
+            <img src="m3.png" class="cassette-img">
+            <span class="label">FAV TRACK 03</span>
+        </a>
+
+        <div class="pair-row">
+            <div class="f-side" style="--r: -2deg;"><img src="f3.png"></div>
+            <a href="https://open.spotify.com/intl-tr/track/3V2K2UzQeNNF5VnbDiIUKj?si=f3ef374f3e0b408f" class="cd-side">
+                <img src="m6.png" class="cd-img">
+                <span class="label">PLAY 💿</span>
+            </a>
+        </div>
+
+        <div class="pair-row">
+            <a href="https://open.spotify.com/intl-tr/track/2kTwN4aDpAmCLVbVWAdb6j?si=dd394324b51c459d" class="cd-side">
+                <img src="m7.png" class="cd-img">
+                <span class="label">PLAY 💿</span>
+            </a>
+            <div class="f-side" style="--r: 3deg;"><img src="f4.png"></div>
+        </div>
+
+        <div class="pair-row">
+            <div class="f-side" style="--r: -3deg;"><img src="f5.png"></div>
+            <a href="https://open.spotify.com/intl-tr/track/7vEGhAaZacQoCKAJfPLVz7?si=75015d2be7ba48f8" class="cd-side">
+                <img src="m9.png" class="cd-img">
+                <span class="label">PLAY 💿</span>
+            </a>
+        </div>
+
+        <a href="index.html" class="back">←Geri Dön</a>
+        
+    </div>
+
+    <script>
+        // Balon Üretici
+        const bg = document.getElementById('balloon-bg');
+        const colors = ['#FFB6C1', '#FF69B4', '#FFFFFF', '#FEF65B'];
+        for (let i = 0; i < 15; i++) {
+            const b = document.createElement('div');
+            b.className = 'bg-balloon';
+            b.style.left = Math.random() * 95 + 'vw';
+            b.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            b.style.setProperty('--d', (Math.random() * 8 + 10) + 's');
+            b.style.animationDelay = Math.random() * 8 + 's';
+            bg.appendChild(b);
+        }
+    </script>
+</body>
+</html>
