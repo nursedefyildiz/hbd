@@ -3,131 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sana Özel ✨</title>
+    <title>25.04</title>
+    
+    <link rel="icon" type="image/png" href="hello_yanan.png">
+    
     <style>
+        :root {
+            --p-pink: #FFB6C1;
+            --p-yellow: #FEF65B;
+            --p-lila: #E6E6FA;
+            --deep-pink: #d63384;
+        }
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body { 
-            background: #ffeaf2;
-            font-family: -apple-system, "Segoe UI", sans-serif;
-            margin: 0;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            background: #ffeaf2; 
+            font-family: -apple-system, sans-serif; 
+            margin: 0; 
+            height: 100vh; 
+            width: 100vw; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
         }
 
-        /* --- BALONLAR VE SAPLARI (İPLERİ) --- */
-        .balloon {
-            position: absolute;
-            bottom: -150px;
-            width: 50px; /* Eski boyuta geri döndü */
-            height: 65px;
-            border-radius: 50%;
-            opacity: 0.6;
-            z-index: 1;
-            animation: floatUp var(--d) linear infinite;
+        /* --- ARKA PLANDA UÇAN BALONLAR --- */
+        .balloon { 
+            position: absolute; 
+            bottom: -150px; 
+            width: 50px; 
+            height: 65px; 
+            border-radius: 50%; 
+            opacity: 0.5; 
+            z-index: 1; 
+            animation: floatUp var(--d) linear infinite; 
+        }
+        .balloon::after { 
+            content: ""; 
+            position: absolute; 
+            bottom: -30px; 
+            left: 50%; 
+            width: 1px; 
+            height: 35px; 
+            background: rgba(0, 0, 0, 0.1); 
+        }
+        @keyframes floatUp { to { transform: translateY(-130vh) rotate(15deg); } }
+
+        /* --- EN ÜSTTEKİ SALLANAN PARTİ BAYRAKLARI (YOĞUNLAŞTIRILMIŞ) --- */
+        .banner-container {
+            position: fixed; 
+            top: -5px; /* İpler biraz yukarıda kalsın */
+            width: 100%; 
+            height: 60px;
+            display: flex; 
+            justify-content: space-around; /* Ekranı tam kaplasınlar */
+            gap: 2px; 
+            z-index: 100;
+            pointer-events: none; /* Kaydırmaya engel olmasın */
+        }
+        .flag {
+            width: 22px; 
+            height: 38px;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            animation: swing var(--speed) infinite ease-in-out alternate;
+            transform-origin: top;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        /* Renkleri ve hızları çeşitlendirelim */
+        .flag:nth-child(4n+1) { background: var(--p-pink); --speed: 2.1s; }
+        .flag:nth-child(4n+2) { background: var(--p-yellow); --speed: 1.8s; }
+        .flag:nth-child(4n+3) { background: var(--p-lila); --speed: 2.4s; }
+        .flag:nth-child(4n+4) { background: #ffffff; --speed: 2s; opacity: 0.8; }
+
+        @keyframes swing { 
+            from { transform: rotate(-12deg); } 
+            to { transform: rotate(12deg); } 
         }
 
-        /* Balonun Sapı (İpi) - KESİNLİKLE DOKUNULMADI */
-        .balloon::after {
-            content: "";
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            width: 1px;
-            height: 35px;
-            background: rgba(0, 0, 0, 0.15);
+        /* --- SÜRPRİZ PANELİ --- */
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.3); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            border-radius: 40px; 
+            padding: 30px 15px; 
+            width: 90%; 
+            max-width: 340px; 
+            text-align: center; 
+            z-index: 10; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            position: relative;
         }
 
-        @keyframes floatUp {
-            to { transform: translateY(-130vh) rotate(15deg); }
+        /* Mum Işığı Efekti (Kodla) */
+        .candle-glow { 
+            position: absolute; 
+            width: 60px; 
+            height: 60px; 
+            background: radial-gradient(circle, var(--p-yellow) 0%, rgba(254, 246, 91, 0) 70%); 
+            border-radius: 50%; 
+            filter: blur(10px); 
+            top: 25%; /* Hello Kitty çizimindeki mumların üzerine ayarla */
+            left: 50%; 
+            transform: translateX(-50%); 
+            opacity: 0.7; 
+            animation: flicker 0.1s infinite alternate; 
+            z-index: 12; 
+        }
+        @keyframes flicker { from { opacity: 0.4; } to { opacity: 0.8; } }
+
+        /* Hello Kitty Görseli (Büyük) */
+        .kitty-img { 
+            width: 100%; 
+            max-width: 290px; 
+            height: auto; 
+            animation: floating 3s ease-in-out infinite; 
+            transition: opacity 0.4s ease; 
+        }
+        @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+        h1 { 
+            color: var(--deep-pink); 
+            font-size: 1.4rem; 
+            margin: 20px 0 10px 0; 
+            font-weight: 600; 
         }
 
-        /* --- YARI SAYDAM PANEL - KESİNLİKLE DOKUNULMADI --- */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.3); /* Yarı saydam beyaz */
-            backdrop-filter: blur(10px); /* Arkayı hafif buğular */
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 40px;
-            padding: 30px 20px;
-            width: 85%;
-            max-width: 320px;
-            text-align: center;
-            z-index: 10;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Minimalist Buton */
+        .clean-btn { 
+            background: none; 
+            border: none; 
+            color: var(--deep-pink); 
+            padding: 10px 20px; 
+            font-size: 1rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: opacity 0.2s; 
         }
-
-        /* --- HELLO KITTY - ARTIK DAHA BÜYÜK! --- */
-        .kitty-img {
-            width: 90%; /* Panelin genişliğinin %90'ını kaplasın */
-            max-width: 290px; /* Paneli patlatmaması için üst sınır */
-            height: auto;
-            animation: floating 3s ease-in-out infinite;
-            filter: drop-shadow(0 15px 25px rgba(214, 51, 132, 0.15));
-            transition: opacity 0.4s ease;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-
-        h1 {
-            color: #d63384;
-            font-size: 1.4rem;
-            margin: 15px 0 10px 0;
-            font-weight: 600;
-        }
-
-        /* --- ÇERÇEVESİZ VE ŞIK BUTON - KESİNLİKLE DOKUNULMADI --- */
-        .clean-btn {
-            background: none;
-            border: none;
-            color: #d63384;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: opacity 0.2s;
-            margin-top: 5px;
-        }
-
-        .clean-btn:active {
-            opacity: 0.6;
-            transform: scale(0.95);
-        }
-
+        .clean-btn:active { opacity: 0.6; transform: scale(0.95); }
     </style>
 </head>
 <body>
 
     <div id="balloon-container"></div>
 
+    <div class="banner-container">
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+        <div class="flag"></div><div class="flag"></div><div class="flag"></div>
+    </div>
+
     <div class="glass-panel">
+        <div class="candle-glow" id="candle-glow-effect"></div>
         <img src="hello_yanan.png" id="kitty" class="kitty-img" alt="Hello Kitty">
         
-        <h1 id="status-text">Üfle ve Dilek Tut...</h1>
+        <h1 id="status-text">Dilek tut ve üfle...</h1>
         
-        <button class="clean-btn" id="action-btn" onclick="ufle()">
-            ÜFLE! 🌬️
-        </button>
+        <button class="clean-btn" id="action-btn" onclick="ufle()"> 👆🏼🌬️</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
-        // Balonları ipleriyle üret
         const container = document.getElementById('balloon-container');
-        const colors = ['#FFB6C1', '#FF69B4', '#FFFFFF', '#FFD700', '#ADD8E6'];
+        const colors = ['#FFB6C1', '#FF69B4', '#FFFFFF', '#FEF65B', '#ADD8E6'];
         
         for (let i = 0; i < 15; i++) {
             const b = document.createElement('div');
@@ -140,26 +188,27 @@
         }
 
         function ufle() {
-            const kitty = document.getElementById('kitty');
+            const glow = document.getElementById('candle-glow-effect');
             
-            kitty.style.opacity = '0.4';
-            setTimeout(() => {
-                kitty.src = 'hello_sonuk.png';
-                kitty.style.opacity = '1';
-                
-                document.getElementById('status-text').innerText = 'İYİ Kİ DOĞDUN! 🎉';
-                
-                const btn = document.getElementById('action-btn');
-                btn.innerText = 'HEDİYENİ AÇ 🎁';
-                btn.onclick = () => window.location.href = "muzikler.html";
+            // Mum ışığını kapat
+            glow.style.opacity = '0';
+            glow.style.display = 'none';
 
-                confetti({
-                    particleCount: 150,
-                    spread: 70,
-                    origin: { y: 0.6 },
-                    colors: ['#FF69B4', '#FFFFFF', '#FFD700']
-                });
-            }, 300);
+            // Görseli sönük olana geçir (hello_sonuk.png yüklemeyi unutma!)
+            document.getElementById('kitty').src = 'hello_sonuk.png';
+
+            // Metin ve butonu güncelle
+            document.getElementById('status-text').innerText = 'İYİ Kİ DOĞDUN! 🎉';
+            const btn = document.getElementById('action-btn');
+            btn.innerText = 'KUTUYU AÇ 🎁';
+            btn.onclick = () => window.location.href = "muzikler.html";
+
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: colors
+            });
         }
     </script>
 </body>
